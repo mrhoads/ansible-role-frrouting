@@ -1,0 +1,31 @@
+---
+# tasks file for mrhoads.frrouting
+
+- name: Download FRR GPG Key
+  apt_key:
+    url: https://deb.frrouting.org/frr/keys.asc
+    state: present
+  become: true
+
+- name: Configure FRR Apt Repository
+  apt_repository:
+    repo: deb https://deb.frrouting.org/frr {{ ansible_lsb.codename }} {{ FRRVER }}
+    state: present
+  become: true
+
+- name: Install FRR Packages
+  package:
+    name:
+      - frr
+      - frr-pythontools
+    state: present
+  become: true
+
+- name: Configure frrvty group
+  user:
+    append: yes
+    groups: 
+      - frrvty
+      - frr
+    name: "{{ frrvty_users }}"
+  become: true

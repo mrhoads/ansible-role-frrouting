@@ -1,0 +1,5 @@
+---
+# defaults file for mrhoads.frrouting
+
+FRRVER: frr-stable
+frrvty_users: mrhoads
