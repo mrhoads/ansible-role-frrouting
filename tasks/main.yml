@@ -29,3 +29,10 @@
       - frr
     name: "{{ frrvty_users }}"
   become: true
+
+- name: Enable BGPD
+  lineinfile:
+    path: /etc/frr/daemons
+    regexp: '^bgpd='
+    line: bgpd=yes
+  become: true
